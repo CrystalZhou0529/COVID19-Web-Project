@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "Page2";
+}
+@model _0131MVCTest3.Models.City
+
+<h2>Page2</h2>
+
+<h2>Thanks for adding @Model.Name's data to our database!</h2>
+<h2>This is the @Model.UID th data in our database!</h2>
+<br />
+<a href="@Url.Action("Index")">Back</a><br />
+<a href="@Url.Action("EditCity")">Edit the City</a><br />
+<a href="@Url.Action("DeleteCity")">Delete the city</a>

@@ -1,0 +1,58 @@
+﻿@model _0131MVCTest3.Models.City
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit Page</h2>
+
+<h3>@Model.Name</h3>
+<h4>@Model.Date.ToShortDateString()</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="updateCityFromTable">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" value="@Model.Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <!--
+
+
+            <div class="form-group">
+            <label asp-for="Date" class="control-label"></label>
+            <input asp-for="Date" value="@Model.Date.ToShortDateString()" class="form-control" />
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+        -->
+
+            <div class="form-group">
+                <label asp-for="ConfirmedNum" class="control-label"></label>
+                <input asp-for="ConfirmedNum" value="@Model.ConfirmedNum" class="form-control" />
+                <span asp-validation-for="ConfirmedNum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Death" class="control-label"></label>
+                <input asp-for="Death" class="form-control" />
+                <span asp-validation-for="Death" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Recovery" class="control-label"></label>
+                <input asp-for="Recovery" class="form-control" />
+                <span asp-validation-for="Recovery" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+        <div>
+            <a href="##" onClick="history.go(-1); return false;"> Return</a>
+        </div>
+
+    </div>
+</div>
+
+

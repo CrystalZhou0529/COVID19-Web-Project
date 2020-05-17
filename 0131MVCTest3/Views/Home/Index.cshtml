@@ -1,0 +1,113 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model _0131MVCTest3.Models.City
+
+    <!--
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+
+       <div class="carousel-inner" role="listbox">
+        <div class="item active">
+
+            <img src="~/images/电影1.jpg" />
+        </div>
+        <div class="item">
+
+            <img src="~/images/电影2.jpg" />
+        </div>
+        <div class="item">
+
+            <img src="~/images/电影3.jpg" />
+        </div>
+    </div>
+
+
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+    </div>
+    -->
+
+
+<div class="row">
+
+    <div class="col-md-6">
+        <h3>Input the data of the province from here:</h3>
+        <form asp-action="Page2" method="post" style="white-space:pre-wrap">
+            City Name:              <input asp-for="Name" list="data" />
+            <datalist id="data">
+                <option value="HuBei">Wuhan</option>
+                <option>ZheJiang</option>
+                <option>GuangDong</option>
+                <option>HeNan</option>
+                <option>HuNan</option>
+                <option>AnHui</option>
+                <option>JiangXi</option>
+                <option>ChongQin</option>
+                <option value="JiangSu">Nanjing</option>
+                <option>SiChuan</option>
+                <option>ShanDong</option>
+                <option>ShangHai</option>
+                <option>BeiJing</option>
+                <option>FuJian</option>
+                <option>HeiLongJiang</option>
+                <option>ShanXi</option>
+                <option>GuangXi</option>
+                <option>HeBei</option>
+                <option>YunNan</option>
+                <option>HaiNan</option>
+                <option>LiaoNing</option>
+                <option>ShaanXi</option>
+                <option>TianJin</option>
+                <option>GuiZhou</option>
+                <option>GanSu</option>
+                <option>JiLin</option>
+                <option>NeiMengGu</option>
+                <option>NingXia</option>
+                <option>XinJiang</option>
+                <option>HongKong</option>
+                <option>QingHai</option>
+                <option>Tibet</option>
+            </datalist>
+            Confirmed Number: <input asp-for="ConfirmedNum" /><br />
+            Death:                     <input asp-for="Death" /><br />
+            Recovery:               <input asp-for="Recovery" /><br />
+            <br />
+            <button type="submit">Submit</button>       <button type="reset">Reset</button>
+
+        </form>
+    </div>
+    <div class="col-md-6">
+        <h3>Search for the city:</h3><br />
+        <form asp-controller="Table" asp-action="SearchTable" method="get">
+            City Name:      <input asp-for="Name" list="data" /><br />
+            <br />
+            <button type="submit">Enter</button>
+        </form>
+        <p>Or get all value from database:</p><a href=" @Url.Action("Index", "Table")">Click here</a>
+        <br />
+        <br />
+    </div>
+    <div>
+        <h3>Search for one day:</h3>
+        <form asp-controller="Heatmap" asp-action="SearchTable" method="get">
+            Date:      <input asp-for="Date" /><br />
+            <br />
+            <button type="submit">Enter</button>
+    </form>
+    </div>
+
+</div>
+

@@ -1,0 +1,46 @@
+﻿2020/02/01: Finish connecting to SQL database.
+		Insert data to it from index.cshtml and display data on page2.cshtml
+	City.cs:
+		-Name
+		-Date (自动提取本地时间)
+		-ConfirmedNum
+		-Death
+		-Recovery
+		
+	DALCity.cs:
+		//插入新城市信息
+			addCity (City city), return UID
+
+2020/02/02: Finish EditCity.cshtml and add functions to DALCity.cs
+	City.cs:
+		-UID (same as ID in database, unique identity & auto increment)
+
+	DALCity.cs:
+		//read from database
+			getCity (int uID), return City city //可以考虑改成由城市名称查询表单
+		//update database item based on ID
+			updateCity (City city), 无返回值
+
+2020/02/03: Finish DeleteCity.cshtml and can delete data based on its uID
+	DALCity.cs:
+		//delete data based on ID
+			deleteCity(int uID), 无返回值
+
+2020/02/04: Finish DisplayTable.cshtml that succeeds from the model called "List"
+	Index界面更新，排版成两列，建立Edit方法
+	DALCity.cs:
+		//Display all data from database: DisplayCity()
+		//Search for a certain city
+			getCityByName(string cname), return List<City>
+
+2020/02/09: Finish highcharts in DisplayTable.cshtml
+	add "ConfirmedNum", "Death", "Recovery" as three lines to line graph
+	HomeController.cs:
+		//SearchTable
+			ViewBag.dateInfo
+			ViewBag.confirmedInfo
+			ViewBag.deathInfo
+			ViewBag.recoveryInfo
+
+2020/02/24: Build Edit.cshtml and try to read data using uID in DisplayTable page
+	use routeValue called id to transmit data from view page to controller

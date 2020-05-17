@@ -1,0 +1,179 @@
+﻿@model IEnumerable<_0131MVCTest3.Models.City>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<head>
+    <meta charset="UTF-8" />
+
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://code.highcharts.com.cn/highmaps/highmaps.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/modules/drilldown.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/modules/exporting.js"></script>
+
+</head>
+
+<h2>Index</h2>
+
+<div id="map"style="width:800px;height:600px;margin:0 auto" ></div>
+
+<script language="JavaScript">
+    var map = null;
+    $.getJSON('https://data.jianshukeji.com/jsonp?filename=geochina/china.json&callback=?', function (mapdata) {
+        function Dictionary() {
+            this.dataStore = [];
+            this.add = add;     // 添加元素
+            this.find = find;    // 查找元素
+        }
+
+        function add(key, value) {
+            this.dataStore[key] = value;
+        }
+
+        function find(key) {
+            return this.dataStore[key];
+        }
+
+        function strToNum(name, num) {
+            var nameArr = name.split(",");
+            var numArr = num.split(",");
+            var dic = new Dictionary();
+            for (var i = 0; i < Number('@ViewBag.length'); i++) {
+                var number = Number(numArr[i]);
+                if (number >= 1) {
+                    number = Math.log(number);
+                }
+                dic.add(nameArr[i], number);
+            }
+            return dic;
+
+        }
+        
+        var remained = strToNum('@ViewBag.cityName', '@ViewBag.remainedInfo');
+
+        var data = [{
+                name: '北京', //Beijing
+                value: remained.find('beijing')
+            }, {
+                name: '上海',
+                value: remained.find('shanghai')
+            }, {
+                name: '广东', 
+                value: remained.find('guangdong')
+            }, {
+                name: '浙江', 
+                value: remained.find('zhejiang')
+            }, {
+                name: '福建',
+                value: remained.find('fujian')
+            }, {
+                name: '湖北', 
+                value: remained.find('hubei')
+            }, {
+                name: '河南',
+                value: remained.find('henan')
+            }, {
+                name: '湖南',
+                value: remained.find('hunan')
+            }, {
+                name: '安徽',
+                value: remained.find('anhui')
+            }, {
+                name: '江西',
+                value: remained.find('jiangxi')
+            }, {
+                name: '山东',
+                value: remained.find('shandong')
+            }, {
+                name: '重庆',
+                value: remained.find('chongqin')
+            }, {
+                name: '四川',
+                value: remained.find('sichuan')
+            }, {
+                name: '江苏',
+                value: remained.find('jiangsu')
+            }, {
+                name: '黑龙江',
+                value: remained.find('heilongjiang')
+            }, {
+                name: '河北',
+                value: remained.find('hebei')
+            }, {
+                name: '香港',
+                value: remained.find('hongkong')
+            }, {
+                name: '广西',
+                value: remained.find('guangxi')
+            }, {
+                name: '陕西',
+                value: remained.find('shanxi')
+            }, {
+                name: '云南',
+                value: remained.find('yunnan')
+            }, {
+                name: '海南',
+                value: remained.find('hainan')
+            }, {
+                name: '贵州',
+                value: remained.find('guizhou')
+            }, {
+                name: '天津',
+                value: remained.find('tianjin')
+            }, {
+                name: '甘肃',
+                value: remained.find('gansu')
+            }, {
+                name: '山西',
+                value: remained.find('shaanxi')
+            }, {
+                name: '辽宁',
+                value: remained.find('liaoning')
+            }, {
+                name: '吉林',
+                value: remained.find('jilin')
+            }, {
+                name: '新疆',
+                value: remained.find('xinjiang')
+            }, {
+                name: '内蒙古',
+                value: remained.find('neimenggu')
+            }, {
+                name: '宁夏',
+                value: remained.find('ningxia')
+            }, {
+                name: '青海',
+                value: remained.find('qinghai')
+            }, {
+                name: '西藏',
+                value: remained.find('tibet')
+            }];
+        map = new Highcharts.Map('map', {
+            title: {
+                text: 'Map of China (all data take logarithm)'
+            },
+            mapNavigation: {
+                enabled: true,
+                buttonOptions: {
+                    verticalAlign: 'bottom'
+                }
+            },
+            colorAxis: {
+                min: 0,
+                minColor: '#fff',
+                maxColor: '#006cee',
+                labels: {
+                    style: {
+                        "color": "red", "fontWeight": "bold"
+                    }
+                }
+            },
+            series: [{
+                data: data,
+                mapData: mapdata,
+                joinBy: 'name',
+                name: '中国地图'
+            }]
+        });
+    });
+</script>

@@ -1,0 +1,168 @@
+﻿@model IEnumerable<_0131MVCTest3.Models.City>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<h2>DisplayTable</h2>
+<head>
+    <meta charset="UTF-8" />
+
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+</head>
+
+<body>
+    
+    <button id="hide">Hide / Show</button>
+    <button id="displaymax">Get Extreme Values</button>
+    <script language="JavaScript">
+        $(document).ready(function () {
+            $("#hide").click(function () {
+                $("#container").toggle(1000);
+            });
+        });
+    </script>
+
+    <div id="container" style="width: 1000px; height: 600px; margin: 0 auto"></div>
+
+    <script language="JavaScript">
+
+        $(document).ready(function () {
+            function strToNum(str) {
+                var arrCon = str.split(",");
+                var x = new Array();
+                for (var i = 0; i < Number('@ViewBag.length'); i++) {
+                    x[i] = Number(arrCon[i]);
+                }
+                return x;
+            }
+            function strToDate(str) {
+                var arrCon = str.split(",");
+                var x = new Array();
+                for (var i = 0; i < Number('@ViewBag.length'); i++) {
+                    var len = arrCon[i].length;
+                    x[i] = arrCon[i].substring(0,len-8);
+                }
+                return x;
+            }
+
+            var date = strToDate('@ViewBag.dateInfo');
+            var confirmedNum = strToNum('@ViewBag.confirmedInfo');
+            var death = strToNum('@ViewBag.deathInfo');
+            var recovery = strToNum('@ViewBag.recoveryInfo');
+            var incConfirmed = strToNum('@ViewBag.incConfirmed');
+
+            var chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'container',
+                    zoomType: 'xy'
+                },
+                title: {
+                    text: '@ViewBag.cityName',
+                        x: -20
+                },
+                xAxis: {
+                    categories: date
+                },
+                yAxis: {
+                    title: {
+                        text: 'Number of Population'
+                    }
+
+                },
+                series: [
+                    {
+                        name: 'Confirmed Number',
+                        data: confirmedNum
+                    },
+                    {
+                        name: 'Death',
+                        data: death
+                    },
+                    {
+                        name: 'Recovery',
+                        data: recovery
+                    },
+                    {
+                        type: 'column',
+                        name: 'Increment of Comfirmed Number',
+                        data: incConfirmed
+                    }
+                ]
+            })
+            $('#displaymax').click(function () {
+                var extremes = chart.yAxis[0].getExtremes();
+                chart.renderer.label(
+                    'Maximum Confirmed Number: ' + extremes.dataMax + '<br/>',
+                    100,
+                    100
+                )
+                    .attr({
+                        fill: '#FCFFC5',
+                        zIndex: 8
+                    })
+                    .add();
+                $(this).attr('disabled', true);
+            });
+
+        });
+    </script>
+
+</body>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConfirmedNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Death)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Recovery)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @item.Date.ToShortDateString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConfirmedNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Death)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Recovery)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.UID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.UID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.UID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "EditCity";
+}
+@model _0131MVCTest3.Models.City
+
+<h2>EditCity</h2>
+<body>
+    <form asp-action="UpdateCity" method="post">
+        City Name: <input asp-for="Name" value="@Model.Name"/><br />
+        Confirmed Number: <input asp-for="ConfirmedNum" value="@Model.ConfirmedNum"/><br />
+        Death: <input asp-for="Death" value="@Model.Death"/><br />
+        Recovery: <input asp-for="Recovery" value="@Model.Recovery"/><br />
+        <button type="submit">Submit</button>
+
+    </form>
+</body>
